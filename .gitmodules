@@ -1,0 +1,12 @@
+[submodule "nord-iterm2"]
+	path = nord-iterm2
+	url = https://github.com/arcticicestudio/nord-iterm2.git
+[submodule "powerlevel10k"]
+	path = powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git
+[submodule "homebrew-install"]
+	path = homebrew-install
+	url = https://github.com/Homebrew/install.git
+[submodule "fast-syntax-highlighting"]
+	path = fast-syntax-highlighting
+	url = https://github.com/zdharma-continuum/fast-syntax-highlighting.git

@@ -43,7 +43,6 @@ brew_casks=(
   iterm2
   jitsi-meet
   logitech-options
-  mattermost
   microsoft-edge
   microsoft-teams
   mumble

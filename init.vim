@@ -41,6 +41,7 @@ set langmenu=en
 set lazyredraw
 set linebreak
 set magic
+set modeline
 set mouse=a
 set nobackup
 set noerrorbells

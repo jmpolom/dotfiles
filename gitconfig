@@ -1,3 +1,5 @@
 [user]
 	email = jon@subly.me
 	name = Jon Polom
+[init]
+	defaultBranch = main

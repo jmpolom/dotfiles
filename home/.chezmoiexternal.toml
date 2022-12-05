@@ -1,0 +1,8 @@
+[".local/share/powerlevel10k"]
+    type = "git-repo"
+    clone.args = "--branch v1.16.1"
+    url = "https://github.com/romkatv/powerlevel10k.git"
+[".local/share/fast-syntax-highlighting"]
+    type = "git-repo"
+    clone.args = "--branch v1.55"
+    url = "https://github.com/zdharma-continuum/fast-syntax-highlighting.git"

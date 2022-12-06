@@ -2,8 +2,10 @@
 
 set -eux
 
-if [[ ! -f /etc/yum.repos.d/libnvidia-container.repo ]]; then
-    curl -sSL https://nvidia.github.io/libnvidia-container/centos8/libnvidia-container.repo | sudo tee /etc/yum.repos.d/libnvidia-container.repo
+repofile="libnvidia-container.repo"
+
+if [[ ! -f /etc/yum.repos.d/${repofile} ]]; then
+    curl -sSL https://nvidia.github.io/libnvidia-container/centos8/${repofile} | sudo tee /etc/yum.repos.d/${repofile}
 else
     echo "libnvidia-container repo appears present, taking no action."
 fi

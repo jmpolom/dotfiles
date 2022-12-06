@@ -35,21 +35,6 @@ fi
 #else
 #    printf "Looks like git is already installed! \n"
 #fi
-#
-## check if macports installed
-#if ! command -v ports &> /dev/null; then
-#    printf "macports not installed, please install! \n"
-#    exit 1
-#fi
-#
-## install packages from macports
-#printf "Updating macports and installing packages... \n"
-#sudo port selfupdate
-#for package in ${macports[@]}
-#do
-#    sudo port install "${package}"
-#done
-#printf "Done! \n"
 
 # install brew
 if ! command -v /opt/homebrew/bin/brew &> /dev/null; then

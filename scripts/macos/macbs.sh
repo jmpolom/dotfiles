@@ -56,29 +56,6 @@ brew_casks=(
 
 hostname="satellite"
 
-# install python versions with pyenv
-install_pyenv () {
-    if ! command -v pyenv 1>/dev/null 2>&1; then
-        python2="2.7.18"
-        python3="3.10.2"
-
-        printf "Installing pyenv python2 (%s) and python3 (%s)... \n" "$python2" "$python3"
-
-        pyenv install -s "$python2"
-        pyenv install -s "$python3"
-
-        # setup global python versions
-        printf "Setting global python versions with pyenv... \n"
-        pyenv global "$python2" "$python3"
-
-        # install ansible and neovim packages
-        printf "Installing global python packages... \n"
-        PIP_REQUIRE_VIRTUALENV=false pip3 install --upgrade ansible black jedi pynvim
-    else
-        printf "Looks like pyenv already exists! \n"
-    fi
-}
-
 # set hostnames
 if [[ "$(scutil --get ComputerName)" = "$hostname" ]] && \
    [[ "$(scutil --get HostName)" = "$hostname" ]]; then
@@ -129,7 +106,7 @@ fi
 # install brew
 if ! command -v /opt/homebrew/bin/brew &> /dev/null; then
     printf "Installing homebrew... \n"
-    /bin/bash -c homebrew-install/install.sh &&
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" &&
     printf "Done! \n"
 else
     printf "Looks like homebrew is already installed! \n"

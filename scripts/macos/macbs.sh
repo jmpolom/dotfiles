@@ -54,33 +54,6 @@ brew_casks=(
   vlc
 )
 
-#macports=(
-#    coreutils
-#    curl
-#    fd
-#    fzf
-#    git
-#    git-lfs
-#    gnupg2
-#    htop
-#    libvirt
-#    magic-wormhole
-#    minicom
-#    multimarkdown
-#    neovim
-#    pinentry-mac
-#    python39
-#    readline
-#    ripgrep
-#    screen
-#    tmux
-#    wireguard-go
-#    wireguard-tools
-#    yubikey-manager
-#    youtube-dl
-#    xz
-#)
-
 hostname="satellite"
 
 # install python versions with pyenv

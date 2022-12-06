@@ -2,58 +2,6 @@
 
 set -eux
 
-# add /opt/homebrew/bin to path in case it isn't present
-export PATH=/opt/homebrew/bin:$PATH
-
-brew_apps=(
-    coreutils
-    curl
-    fd
-    fzf
-    git
-    git-lfs
-    gnupg
-    htop
-    libvirt
-    lima
-    magic-wormhole
-    minicom
-    multimarkdown
-    neovim
-    pinentry-mac
-    pass
-    readline
-    ripgrep
-    screen
-    shellcheck
-    shellharden
-    shfmt
-    wireguard-go
-    wireguard-tools
-    ykman
-    youtube-dl
-    xz
-)
-
-brew_casks=(
-  1password
-  adguard
-  chromium
-  firefox
-  iterm2
-  jitsi-meet
-  logitech-options
-  microsoft-edge
-  microsoft-teams
-  mumble
-  mullvadvpn
-  rectangle
-  signal
-  spotify
-  visual-studio-code-insiders
-  vlc
-)
-
 hostname="satellite"
 
 # set hostnames
@@ -111,25 +59,3 @@ if ! command -v /opt/homebrew/bin/brew &> /dev/null; then
 else
     printf "Looks like homebrew is already installed! \n"
 fi
-
-# install packages from homebrew core
-printf "Updating brew, upgrading installed packages and installing apps... \n"
-/opt/homebrew/bin/brew update
-/opt/homebrew/bin/brew upgrade
-/opt/homebrew/bin/brew install "${brew_apps[@]}"
-
-# tap additional casks
-printf "Tapping additional casks... \n"
-/opt/homebrew/bin/brew tap homebrew/homebrew-cask-drivers
-/opt/homebrew/bin/brew tap homebrew/homebrew-cask-versions
-/opt/homebrew/bin/brew tap homebrew/homebrew-cask-fonts
-
-# Install fonts
-printf "Installing fonts... \n"
-/opt/homebrew/bin/brew install font-meslo-for-powerline \
-                               font-meslo-lg \
-                               font-meslo-lg-dz \
-                               font-meslo-lg-nerd-font
-
-printf "Installing homebrew casks... \n"
-/opt/homebrew/bin/brew install --cask "${brew_casks[@]}"

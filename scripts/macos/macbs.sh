@@ -27,14 +27,14 @@ else
     printf "Looks like PowerChime is already disabled! \n"
 fi
 
-## make sure git is initially installed
-#if ! command -v git &> /dev/null; then
-#    printf "Installing git via xcode tools... \n"
-#    xcode-select --install
-#    printf "Done! \n"
-#else
-#    printf "Looks like git is already installed! \n"
-#fi
+# make sure git is initially installed
+if ! command -v git &> /dev/null; then
+    printf "Installing git via xcode tools... \n"
+    xcode-select --install
+    printf "Done! \n"
+else
+    printf "Looks like git is already installed! \n"
+fi
 
 # install brew
 if ! command -v /opt/homebrew/bin/brew &> /dev/null; then

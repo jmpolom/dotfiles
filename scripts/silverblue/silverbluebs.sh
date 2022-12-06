@@ -1,26 +1,33 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -eux
 
 layered_apps=(
+  age
   akmod-nvidia
   fd-find
+  fish
   fzf
   git-credential-libsecret
+  gopass
   htop
   kitty
+  moby-engine
   neovim
+  nvidia-container-toolkit
   openconnect
   opensc
   p7zip
   python3-neovim
   ripgrep
   screen
+  setroubleshoot-server
   sway
   tcpdump
   util-linux-user
   vulkan-tools
   wl-clipboard
+  xorg-x11-drv-nvidia-cuda
   zsh
 )
 

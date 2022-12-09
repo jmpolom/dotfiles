@@ -29,6 +29,12 @@ layered_apps=(
   wl-clipboard
   xorg-x11-drv-nvidia-cuda
   zsh
+  qemu
+  edk2-tools
+  genisoimage
+  spice-gtk-tools
+  swtpm
+  xrandr
 )
 
 flatpaks=(

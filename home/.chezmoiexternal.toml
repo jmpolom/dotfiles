@@ -8,3 +8,9 @@
     url = "https://github.com/zdharma-continuum/fast-syntax-highlighting/archive/refs/tags/v1.55.tar.gz"
     exact = true
     stripComponents = 1
+{{ if eq .chezmoi.os "linux" -}}
+[".local/share/fonts/FiraCode"]
+    type = "archive"
+    url = "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/FiraCode.zip"
+    exact = true
+{{ end -}}

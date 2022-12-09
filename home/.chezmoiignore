@@ -1,3 +1,4 @@
 {{ if eq .chezmoi.os "darwin" -}}
 .config/fish/completions/chezmoi.fish
+.config/fish/completions/gopass.fish
 {{ end -}}

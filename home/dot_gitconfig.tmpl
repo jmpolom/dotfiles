@@ -1,9 +1,9 @@
 {{ if eq .chezmoi.os "linux" -}}
 [credential]
-	helper = libsecret
+    helper = libsecret
 {{ end -}}
 [user]
-	email = jon@subly.me
-	name = Jon Polom
+    email = {{ .email | quote }}
+    name = Jon Polom
 [init]
-	defaultBranch = main
+    defaultBranch = main

@@ -16,6 +16,10 @@ return {
                     hide_dotfiles = false,
                 },
             },
-        }
+        },
+        keys = {
+            { "-", "<cmd>:Neotree toggle<CR>" },
+            { "_", "<cmd>:Neotree toggle reveal<CR>" },
+        },
     }
 }

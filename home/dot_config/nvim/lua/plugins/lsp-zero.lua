@@ -2,13 +2,19 @@ return {
     {
         "VonHeikemen/lsp-zero.nvim",
         branch = "v2.x",
+        event = "VeryLazy",
+        ft = {
+            "lua",
+            "sh",
+            "yaml",
+        },
         dependencies = {
             -- LSP
             { "neovim/nvim-lspconfig" },
             {
                 "williamboman/mason.nvim",
                 build = ":MasonUpdate",
-                opts = {}, -- buggy; mason doesn't get setup without this
+                config = true,
             },
             {
                 "williamboman/mason-lspconfig.nvim",
@@ -102,8 +108,5 @@ return {
                 },
             })
         end,
-        keys = {
-            { "<leader>F", "<cmd>:LspZeroFormat<cr>" },
-        },
     }
 }

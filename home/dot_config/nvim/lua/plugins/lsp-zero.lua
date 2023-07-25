@@ -19,37 +19,13 @@ return {
                     },
                 },
             },
-            {
-                "jose-elias-alvarez/null-ls.nvim",
-                dependencies = {
-                   "nvim-lua/plenary.nvim",
-                },
-                config = function()
-                    local null_ls = require("null-ls")
-
-                    null_ls.setup({
-                        sources = {
-                            null_ls.builtins.diagnostics.hadolint,
-                            null_ls.builtins.diagnostics.shellcheck,
-                            null_ls.builtins.formatting.black,
-                            null_ls.builtins.formatting.isort,
-                            null_ls.builtins.formatting.jq,
-                            null_ls.builtins.formatting.prettier,
-                            null_ls.builtins.formatting.shellharden,
-                            null_ls.builtins.formatting.shfmt,
-                            null_ls.builtins.formatting.stylua,
-                        },
-                    })
-                end,
-            },
-            { "jayp0521/mason-null-ls.nvim" },
             -- Autocompletion
-            { "hrsh7th/nvim-cmp" },
             { "hrsh7th/cmp-buffer" },
-            { "hrsh7th/cmp-path" },
-            { "saadparwaiz1/cmp_luasnip" },
             { "hrsh7th/cmp-nvim-lsp" },
             { "hrsh7th/cmp-nvim-lua" },
+            { "hrsh7th/cmp-path" },
+            { "hrsh7th/nvim-cmp" },
+            { "saadparwaiz1/cmp_luasnip" },
             -- Snippets
             { "L3MON4D3/LuaSnip" },
             -- Snippet Collection (Optional)

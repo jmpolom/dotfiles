@@ -4,13 +4,14 @@ return {
         lazy = false,
         opts = {
             integrations = {
-                treesitter = true,
-                mason = true,
-                neotree = true,
+                illuminate = true,
                 markdown = true,
+                mason = true,
                 native_lsp = {
                     enabled = true,
                 },
+                neotree = true,
+                treesitter = true,
             }
         }
     }

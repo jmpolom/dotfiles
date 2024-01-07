@@ -20,3 +20,8 @@ vim.keymap.set("n", "<C-q>", ":bprevious <BAR> bd #<CR>")
 -- Pasting indent
 vim.keymap.set("n", "p", "[p")
 vim.keymap.set("n", "P", "[P")
+
+-- Diagnostics
+vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
+vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')

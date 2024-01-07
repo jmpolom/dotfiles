@@ -2,6 +2,7 @@ return {
     {
         "VonHeikemen/lsp-zero.nvim",
         branch = "v2.x",
+        enabled = false,
         event = "VeryLazy",
         ft = {
             "lua",
@@ -11,21 +12,7 @@ return {
         dependencies = {
             -- LSP
             { "neovim/nvim-lspconfig" },
-            {
-                "williamboman/mason.nvim",
-                build = ":MasonUpdate",
-                config = true,
-            },
-            {
-                "williamboman/mason-lspconfig.nvim",
-                opts = {
-                    ensure_installed = {
-                        "lua_ls",
-                        "yamlls",
-                    },
-                },
-            },
-            -- Autocompletion
+             -- Autocompletion
             { "hrsh7th/cmp-buffer" },
             { "hrsh7th/cmp-nvim-lsp" },
             { "hrsh7th/cmp-nvim-lua" },
@@ -48,13 +35,19 @@ return {
 
             require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
 
+            lsp.setup_servers({
+                "lua_ls",
+                "rust_analyzer",
+                "yamlls"
+            })
+
             lsp.setup()
 
             lsp.set_sign_icons({
                 error = '✘',
                 warn = '▲',
                 hint = '⚑',
-                info = ''
+                info = '»'
             })
 
             vim.diagnostic.config({

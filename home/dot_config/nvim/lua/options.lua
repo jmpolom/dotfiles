@@ -22,6 +22,9 @@ vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.wrap = false
 
+-- Autocomplete
+vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
+
 -- Undo
 vim.opt.undofile = true
 vim.opt.undolevels = 5000

@@ -5,6 +5,12 @@ return {
         config = function ()
             require("formatter").setup({
             filetype = {
+                css = {
+                    require("formatter.filetypes.html").prettier
+                },
+                html = {
+                    require("formatter.filetypes.html").prettier
+                },
                 json = {
                     require("formatter.filetypes.json").jq
                 },

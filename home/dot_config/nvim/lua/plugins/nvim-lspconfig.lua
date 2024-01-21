@@ -38,9 +38,11 @@ return {
                   return true
                 end,
             })
+
             lspconfig.rust_analyzer.setup({
                 capabilities = lsp_capabilities,
             })
+
             lspconfig.yamlls.setup({
                capabilities = lsp_capabilities,
             })

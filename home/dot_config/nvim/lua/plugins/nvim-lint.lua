@@ -3,8 +3,17 @@ return {
         "mfussenegger/nvim-lint",
         config = function()
             require("lint").linters_by_ft = {
+                css = {
+                    "stylelint",
+                },
                 dockerfile = {
                     "hadolint",
+                },
+                html = {
+                    "tidy",
+                },
+                json = {
+                    "jsonlint",
                 },
                 markdown = {
                     "vale",

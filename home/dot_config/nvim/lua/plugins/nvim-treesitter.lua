@@ -27,6 +27,7 @@ return {
                 "regex",
                 "rust",
             }
-        }
+        },
+        enabled = false,
     }
 }

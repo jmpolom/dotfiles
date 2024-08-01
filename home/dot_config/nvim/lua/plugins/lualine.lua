@@ -5,14 +5,38 @@ return {
         event = "VeryLazy",
         opts = {
             options = {
-                theme = "catppuccin",
+                theme = "auto",
                 section_separators = "",
                 component_separators = "",
-                disabled_filetypes = { statusline = { "neo-tree " }, winbar = { "neo-tree" } },
+                disabled_filetypes = {
+                    statusline = {
+                        "neo-tree",
+                    },
+                    winbar = {
+                        "neo-tree"
+                    }
+                },
                 ignore_focus = { "neo-tree" },
             },
             sections = {
-                lualine_c = { { "filename", file_status = true, path = 1 } },
+                lualine_b = {
+                    {
+                        "diagnostics",
+                        symbols = {
+                            error = 'E',
+                            warn = 'W',
+                            info = 'I',
+                            hint = 'H',
+                        },
+                    },
+                },
+                lualine_c = {
+                    {
+                        "filename",
+                        file_status = true,
+                        path = 1,
+                    }
+                },
             },
             extensions = { "fugitive", "neo-tree" },
         },

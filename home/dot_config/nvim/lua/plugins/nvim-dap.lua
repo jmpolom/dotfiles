@@ -6,10 +6,10 @@ return {
 
             dap.configurations.lua = {
                 {
-                  type = 'nlua',
-                  request = 'attach',
-                  name = "Attach to running Neovim instance",
-                }
+                    type = 'nlua',
+                    request = 'attach',
+                    name = "Attach to running Neovim instance",
+                },
             }
 
             dap.adapters.nlua = function(callback, config)

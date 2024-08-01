@@ -7,7 +7,6 @@ vim.opt.relativenumber = false
 vim.opt.termguicolors = true
 
 -- General
-vim.opt.shell = "/bin/zsh"
 vim.opt.clipboard = { "unnamed", "unnamedplus" }
 vim.opt.confirm = true
 vim.opt.hidden = true

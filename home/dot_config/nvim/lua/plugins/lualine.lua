@@ -27,7 +27,10 @@ return {
                     }
                 },
             },
-            extensions = { "fugitive", "neo-tree" },
+            extensions = {
+                "fugitive",
+                "neo-tree",
+            },
         },
     }
 }

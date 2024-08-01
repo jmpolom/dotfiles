@@ -1,6 +1,6 @@
 {{ if eq .chezmoi.os "linux" -}}
 [".local/share/fonts/FiraCode"]
     type = "archive"
-    url = "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/FiraCode.zip"
+    url = "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip"
     exact = true
 {{ end -}}

@@ -1,6 +1,9 @@
+-- Leader
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 -- Appearance
 vim.opt.background = "dark"
-vim.cmd("colorscheme catppuccin-macchiato")
 vim.opt.cursorline = true
 vim.opt.number = true
 vim.opt.relativenumber = false
@@ -35,3 +38,15 @@ vim.opt.splitright = true
 -- Tolerability
 vim.opt.errorbells = false
 vim.opt.visualbell = false
+
+-- Diagnostics
+local function dx_format(d)
+    return string.format("(%d:%d) %s", d.lnum, d.col, d.message)
+end
+
+vim.diagnostic.config({
+    virtual_text = true,
+    float = {
+        format=dx_format,
+    },
+})

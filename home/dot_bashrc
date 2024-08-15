@@ -1,0 +1,36 @@
+#!/usr/bin/bash
+
+for file in /etc/bashrc /opt/homebrew/etc/profile.d/bash_completion.sh; do
+    if [ -f "$file" ]; then
+        source "$file"
+    fi
+done
+
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+
+export PATH
+
+if [ -f ~/.bash_aliases ]; then
+    source ~/.bash_aliases
+fi
+
+source "${HOME}/.local/bin/git-prompt.sh"
+
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWCOLORHINTS=1
+
+# DarkSlateGray3
+USER_COLOR=$'\[\e[38;5;116m\]'
+# SkyBlue2
+HOST_COLOR=$'\[\e[38;5;111m\]'
+# NavajoWhite1
+CWD_COLOR=$'\[\e[38;5;223m\]'
+CLEAR_COLOR=$'\[\e[0m\]'
+
+export PS1="${USER_COLOR}\u${CLEAR_COLOR}@${HOST_COLOR}\h${CLEAR_COLOR}:${CWD_COLOR}\W${CLEAR_COLOR}\$(__git_ps1 \" (%s)\")$ "
+export PS2="${USER_COLOR}> ${CLEAR_COLOR}"
+
+unset rc

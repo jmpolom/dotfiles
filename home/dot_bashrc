@@ -6,12 +6,24 @@ for file in /etc/bashrc /opt/homebrew/etc/profile.d/bash_completion.sh; do
     fi
 done
 
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
-then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+if [[ "$PATH" != *"$HOME/.local/bin"* ]]; then
+    export PATH="$HOME/.local/bin:$PATH"
 fi
 
-export PATH
+if [ -d "/opt/homebrew" ]; then
+    export HOMEBREW_PREFIX="/opt/homebrew"
+    export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+    export HOMEBREW_REPOSITORY="/opt/homebrew"
+    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}"
+    export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:"
+    export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
+fi
+
+if command -v go &> /dev/null; then
+    GOPATH="$(go env GOPATH)"
+    export GOPATH
+    export PATH="$GOPATH/bin:$PATH"
+fi
 
 shopt -s checkwinsize
 shopt -s direxpand
@@ -24,9 +36,6 @@ if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
 fi
 
-export GIT_PS1_SHOWDIRTYSTATE=1
-export GIT_PS1_SHOWCOLORHINTS=1
-
 # DarkSlateGray3
 user_color=$'\[\e[38;5;116m\]'
 # SkyBlue2
@@ -38,13 +47,14 @@ clear_color=$'\[\e[0m\]'
 PS1="${user_color}\u${clear_color}@${host_color}\h${clear_color}:${cwd_color}\W${clear_color}"
 
 if [ -f "${HOME}/.local/bin/git-prompt.sh" ]; then
+    export GIT_PS1_SHOWCOLORHINTS=1
+    export GIT_PS1_SHOWDIRTYSTATE=1
     source "${HOME}/.local/bin/git-prompt.sh"
-    PS1="${PS1}\$(__git_ps1 \" (%s)\")$ "
+    export PS1="${PS1}\$(__git_ps1 \" (%s)\")$ "
 else
-    PS1="${PS1}$ "
+    export PS1="${PS1}$ "
 fi
 
-export "PS1"
 export PS2="${user_color}> ${clear_color}"
 
 unset rc

@@ -8,8 +8,7 @@ font_family FiraCode Nerd Font Mono
 font_size 13.0
 font_features FiraCodeNerdFontCompleteM-Regular +cv02 +cv05 +cv09 +cv14 +ss04 +cv16 +cv31 +cv25 +cv26 +cv32 +cv28 +zero +onum
 
-# we will do shell integration manually in shell rc
-shell_integration disabled
+shell_integration no-cursor
 
 # mod key
 {{ if eq .chezmoi.os "darwin" -}}
@@ -46,7 +45,8 @@ tab_bar_min_tabs            1
 tab_bar_edge                bottom
 tab_bar_style               powerline
 tab_powerline_style         slanted
-tab_title_template          {title}{' :{}:'.format(num_windows) if num_windows > 1 else ''}
+tab_title_template          {index}:{title}
+active_tab_title_template   {title}
 
 # tabs
 map kitty_mod+t new_tab_with_cwd

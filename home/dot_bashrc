@@ -13,24 +13,38 @@ fi
 
 export PATH
 
+shopt -s checkwinsize
+shopt -s direxpand
+shopt -s histappend
+
+export EDITOR=nvim
+export VISUAL=nvim
+
 if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
 fi
-
-source "${HOME}/.local/bin/git-prompt.sh"
 
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWCOLORHINTS=1
 
 # DarkSlateGray3
-USER_COLOR=$'\[\e[38;5;116m\]'
+user_color=$'\[\e[38;5;116m\]'
 # SkyBlue2
-HOST_COLOR=$'\[\e[38;5;111m\]'
+host_color=$'\[\e[38;5;111m\]'
 # NavajoWhite1
-CWD_COLOR=$'\[\e[38;5;223m\]'
-CLEAR_COLOR=$'\[\e[0m\]'
+cwd_color=$'\[\e[38;5;223m\]'
+clear_color=$'\[\e[0m\]'
 
-export PS1="${USER_COLOR}\u${CLEAR_COLOR}@${HOST_COLOR}\h${CLEAR_COLOR}:${CWD_COLOR}\W${CLEAR_COLOR}\$(__git_ps1 \" (%s)\")$ "
-export PS2="${USER_COLOR}> ${CLEAR_COLOR}"
+PS1="${user_color}\u${clear_color}@${host_color}\h${clear_color}:${cwd_color}\W${clear_color}"
+
+if [ -f "${HOME}/.local/bin/git-prompt.sh" ]; then
+    source "${HOME}/.local/bin/git-prompt.sh"
+    PS1="${PS1}\$(__git_ps1 \" (%s)\")$ "
+else
+    PS1="${PS1}$ "
+fi
+
+export "PS1"
+export PS2="${user_color}> ${clear_color}"
 
 unset rc

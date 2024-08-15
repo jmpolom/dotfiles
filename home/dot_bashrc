@@ -1,11 +1,5 @@
 #!/usr/bin/bash
 
-for file in /etc/bashrc /opt/homebrew/etc/profile.d/bash_completion.sh; do
-    if [ -f "$file" ]; then
-        source "$file"
-    fi
-done
-
 if [[ "$PATH" != *"$HOME/.local/bin"* ]]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
@@ -25,6 +19,16 @@ if command -v go &> /dev/null; then
     export PATH="$GOPATH/bin:$PATH"
 fi
 
+for file in /etc/bashrc /opt/homebrew/etc/profile.d/bash_completion.sh; do
+    if [ -f "$file" ]; then
+        source "$file"
+    fi
+done
+
+if [ -f ~/.bash_aliases ]; then
+    source ~/.bash_aliases
+fi
+
 shopt -s checkwinsize
 shopt -s direxpand
 shopt -s dirspell
@@ -33,10 +37,6 @@ shopt -s histappend
 export EDITOR=nvim
 export HISTSIZE=1000
 export VISUAL=nvim
-
-if [ -f ~/.bash_aliases ]; then
-    source ~/.bash_aliases
-fi
 
 # DarkSlateGray3
 user_color=$'\[\e[38;5;116m\]'

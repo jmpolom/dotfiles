@@ -27,9 +27,11 @@ fi
 
 shopt -s checkwinsize
 shopt -s direxpand
+shopt -s dirspell
 shopt -s histappend
 
 export EDITOR=nvim
+export HISTSIZE=1000
 export VISUAL=nvim
 
 if [ -f ~/.bash_aliases ]; then

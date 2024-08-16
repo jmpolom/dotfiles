@@ -34,8 +34,9 @@ shopt -s direxpand
 shopt -s dirspell
 shopt -s histappend
 
+HISTSIZE=1000
+
 export EDITOR=nvim
-export HISTSIZE=1000
 export VISUAL=nvim
 
 # DarkSlateGray3

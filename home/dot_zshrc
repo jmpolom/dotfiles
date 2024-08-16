@@ -1,0 +1,114 @@
+#!/bin/zsh
+
+if [[ "$PATH" != "$HOME/.local/bin" ]]; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [[ -d "/opt/homebrew" ]]; then
+    export HOMEBREW_PREFIX="/opt/homebrew"
+    export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+    export HOMEBREW_REPOSITORY="/opt/homebrew"
+    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}"
+    export MANPATH=":${MANPATH#:}"
+    export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
+fi
+
+if command -v go &> /dev/null; then
+    GOPATH="$(go env GOPATH)"
+    export GOPATH
+    export PATH="$GOPATH/bin:$PATH"
+fi
+
+# update fpath for homebrew completions
+if command -v brew &>/dev/null; then
+    FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
+fi
+
+# get uname: [Linux, Darwin]
+uname="$(uname)"
+
+# correct keymapping issues on Linux -- tested on silverblue. what a trip yo.
+# no idea if this works elsewhere... user assumes all risk
+#if [[ "$uname" == "Linux" ]]; then
+#    typeset -A key
+#
+#    key[Delete]='^[[3~'
+#    key[Home]='^[[H'
+#    key[End]='^[[F'
+#
+#    bindkey "${key[Delete]}" delete-char
+#    bindkey "${key[Home]}" beginning-of-line
+#    bindkey "${key[End]}" end-of-line
+#fi
+
+setopt APPEND_HISTORY
+setopt MULTIBYTE
+setopt PROMPT_SUBST
+
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zsh_history
+
+# setup completion
+autoload -Uz compinit compaudit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots) # include hidden files
+
+# local chezmoi, so directly source the completions
+if [[ $(command -v chezmoi) =~ '.local/bin' ]]; then
+    source =(chezmoi completion zsh)
+    compdef _chezmoi chezmoi
+fi
+
+# fzf
+if [[ "$uname" == "Darwin" ]]; then
+    fzf_keybindings_path="/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
+    fzf_completion_path="/opt/homebrew/opt/fzf/shell/completion.zsh"
+# works for fedora, might have to edit if another distro
+elif [[ "$uname" == "Linux" ]]; then
+    fzf_keybindings_path="/usr/share/fzf/shell/key-bindings.zsh"
+    fzf_completion_path="/usr/share/zsh/site-functions/fzf"
+fi
+
+export FZF_DEFAULT_COMMAND='fd --hidden --follow' # use with fd instead of find
+[[ -f "$fzf_keybindings_path" ]] && source "$fzf_keybindings_path"
+[[ -f "$fzf_completion_path" ]] && source "$fzf_completion_path"
+
+# macOS only aliases
+if [[ "$uname" == "Darwin" ]]; then
+    alias ls='gls --color=auto --group-directories-first'
+    alias sed='gsed'
+elif [[ "$uname" == "Linux" ]]; then
+    alias ls='ls --color=auto --group-directories-first'
+fi
+
+# everything aliases
+alias la='ls -A'
+alias ll='ls -Alh'
+
+# default editor
+export EDITOR='nvim'
+export VISUAL='nvim'
+
+# DarkSlateGray3
+user_color='%F{116}'
+# SkyBlue2
+host_color='%F{111}'
+# NavajoWhite1
+cwd_color='%F{223}'
+clear_color='%f'
+
+PS1="${user_color}%n${clear_color}@${host_color}%m${clear_color}:${cwd_color}%1~${clear_color}"
+
+if [[ -f "${HOME}/.local/bin/git-prompt.sh" ]]; then
+    export GIT_PS1_SHOWCOLORHINTS=1
+    export GIT_PS1_SHOWDIRTYSTATE=1
+    source "${HOME}/.local/bin/git-prompt.sh"
+    export PS1="${PS1}\$(__git_ps1 ' (%s)')\$ "
+else
+    export PS1="${PS1}\$ "
+fi
+
+export PS2="${user_color}> ${clear_color}"

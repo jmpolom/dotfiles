@@ -27,20 +27,6 @@ fi
 # get uname: [Linux, Darwin]
 uname="$(uname)"
 
-# correct keymapping issues on Linux -- tested on silverblue. what a trip yo.
-# no idea if this works elsewhere... user assumes all risk
-#if [[ "$uname" == "Linux" ]]; then
-#    typeset -A key
-#
-#    key[Delete]='^[[3~'
-#    key[Home]='^[[H'
-#    key[End]='^[[F'
-#
-#    bindkey "${key[Delete]}" delete-char
-#    bindkey "${key[Home]}" beginning-of-line
-#    bindkey "${key[End]}" end-of-line
-#fi
-
 setopt APPEND_HISTORY
 setopt MULTIBYTE
 setopt PROMPT_SUBST

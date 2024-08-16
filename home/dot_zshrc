@@ -102,8 +102,8 @@ branch_color='%F{114}'
 # LightCoral
 act_color='%F{210}'
 
-vcs_format="(${branch_color}%b${clear_color}${act_color}%c%u${clear_color})"
-action_vcs_format="(${branch_color}%b${clear_color}|${act_color}%a${clear_color})"
+vcs_format="[${branch_color}%b${clear_color}${act_color}%c%u${clear_color}]"
+action_vcs_format="[${branch_color}%b${clear_color}|${act_color}%a${clear_color}]"
 
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git

@@ -40,24 +40,23 @@ export EDITOR=nvim
 export VISUAL=nvim
 
 # DarkSlateGray3
-user_color=$'\[\e[38;5;116m\]'
+user_color=$'\001\e[38;5;116m\002'
 # SkyBlue2
-host_color=$'\[\e[38;5;111m\]'
+host_color=$'\001\e[38;5;111m\002'
 # NavajoWhite1
-cwd_color=$'\[\e[38;5;223m\]'
-clear_color=$'\[\e[0m\]'
+cwd_color=$'\001\e[38;5;223m\002'
+clear_color=$'\001\e[0m\002'
 
-PS1="${user_color}\u${clear_color}@${host_color}\h${clear_color}:${cwd_color}\W${clear_color}"
+PS1="${user_color}\u${clear_color}@${host_color}\h${clear_color}:${cwd_color}\W${clear_color}\$ "
 
 if [ -f "${HOME}/.local/bin/git-prompt.sh" ]; then
     export GIT_PS1_SHOWCOLORHINTS=1
     export GIT_PS1_SHOWDIRTYSTATE=1
     source "${HOME}/.local/bin/git-prompt.sh"
-    export PS1="${PS1}\$(__git_ps1 \" (%s)\")$ "
-else
-    export PS1="${PS1}$ "
+    PS1="\$(__git_ps1 '[%s]')${PS1}"
 fi
 
-export PS2="${user_color}> ${clear_color}"
+export "PS1"
+export PS2="${user_color}>${clear_color} "
 
 unset rc

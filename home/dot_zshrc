@@ -64,6 +64,14 @@ if command -v fzf &> /dev/null; then
     [[ -f "$fzf_completion_path" ]] && source "$fzf_completion_path"
 fi
 
+# correct keymapping issues on Linux -- why is this only needed for zsh?!
+# also wonky and unifxed: insert, page-up, page-down
+if [[ "$uname" == "Linux" ]]; then
+    bindkey '^[[3~' delete-char
+    bindkey '^[[H' beginning-of-line
+    bindkey '^[[F' end-of-line
+fi
+
 # macOS only aliases
 if [[ "$uname" == "Darwin" ]]; then
     alias ls='gls --color=auto --group-directories-first'

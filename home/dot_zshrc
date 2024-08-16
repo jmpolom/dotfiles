@@ -49,18 +49,20 @@ if [[ $(command -v chezmoi) =~ '.local/bin' ]]; then
 fi
 
 # fzf
-if [[ "$uname" == "Darwin" ]]; then
-    fzf_keybindings_path="/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
-    fzf_completion_path="/opt/homebrew/opt/fzf/shell/completion.zsh"
-# works for fedora, might have to edit if another distro
-elif [[ "$uname" == "Linux" ]]; then
-    fzf_keybindings_path="/usr/share/fzf/shell/key-bindings.zsh"
-    fzf_completion_path="/usr/share/zsh/site-functions/fzf"
-fi
+if command -v fzf &> /dev/null; then
+    if [[ "$uname" == "Darwin" ]]; then
+        fzf_keybindings_path="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/fzf/shell/key-bindings.zsh"
+        fzf_completion_path="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/fzf/shell/completion.zsh"
+    # works for fedora, might have to edit if another distro
+    elif [[ "$uname" == "Linux" ]]; then
+        fzf_keybindings_path="/usr/share/fzf/shell/key-bindings.zsh"
+        fzf_completion_path="/usr/share/zsh/site-functions/fzf"
+    fi
 
-export FZF_DEFAULT_COMMAND='fd --hidden --follow' # use with fd instead of find
-[[ -f "$fzf_keybindings_path" ]] && source "$fzf_keybindings_path"
-[[ -f "$fzf_completion_path" ]] && source "$fzf_completion_path"
+    export FZF_DEFAULT_COMMAND='fd --hidden --follow' # use with fd instead of find
+    [[ -f "$fzf_keybindings_path" ]] && source "$fzf_keybindings_path"
+    [[ -f "$fzf_completion_path" ]] && source "$fzf_completion_path"
+fi
 
 # macOS only aliases
 if [[ "$uname" == "Darwin" ]]; then
@@ -86,15 +88,30 @@ host_color='%F{111}'
 cwd_color='%F{223}'
 clear_color='%f'
 
-PS1="${user_color}%n${clear_color}@${host_color}%m${clear_color}:${cwd_color}%1~${clear_color}"
+# vcs info
+# DarkSeaGreen3
+branch_color='%F{114}'
+# LightCoral
+act_color='%F{210}'
 
-if [[ -f "${HOME}/.local/bin/git-prompt.sh" ]]; then
-    export GIT_PS1_SHOWCOLORHINTS=1
-    export GIT_PS1_SHOWDIRTYSTATE=1
-    source "${HOME}/.local/bin/git-prompt.sh"
-    export PS1="${PS1}\$(__git_ps1 ' (%s)')\$ "
-else
-    export PS1="${PS1}\$ "
-fi
+vcs_format="(${branch_color}%b${clear_color}${act_color}%c%u${clear_color})"
+action_vcs_format="(${branch_color}%b${clear_color}|${act_color}%a${clear_color})"
 
-export PS2="${user_color}> ${clear_color}"
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' formats "$vcs_format"
+zstyle ':vcs_info:*' actionformats "$action_vcs_format"
+zstyle ':vcs_info:*' stagedstr " +"
+zstyle ':vcs_info:*' unstagedstr " *"
+zstyle ':vcs_info:*' check-for-changes true # never seems to show unstaged?
+#zstyle ':vcs_info:*' check-for-staged-changes true
+#zstyle ':vcs_info:*' get-unapplied true
+#zstyle ':vcs_info:*' get-revision true
+
+precmd() { vcs_info }
+
+# user@hostname:cwd$ with colors
+export PS1="${user_color}%n${clear_color}@${host_color}%m${clear_color}:${cwd_color}%1~${clear_color}\$ "
+# non-zero-return vcs_info
+export RPS1="${act_color}%0(?,,%? )${clear_color}\${vcs_info_msg_0_}"
+export PS2="${user_color}>${clear_color} "

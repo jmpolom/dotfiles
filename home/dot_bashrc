@@ -45,9 +45,21 @@ user_color=$'\001\e[38;5;116m\002'
 host_color=$'\001\e[38;5;111m\002'
 # NavajoWhite1
 cwd_color=$'\001\e[38;5;223m\002'
+# LightCoral
+err_color=$'\001\e[38;5;210m\002'
 clear_color=$'\001\e[0m\002'
 
-PS1="${user_color}\u${clear_color}@${host_color}\h${clear_color}:${cwd_color}\W${clear_color}\$ "
+# this is useful for identifying misbehaved applications
+ret_prompt() {
+    ret="$?"
+    if [ "$ret" -ne 0 ]; then
+        printf "%s %s %s" "${err_color}" "$ret" "${clear_color}"
+    fi
+}
+
+#PROMPT_COMMAND='printf "\033]0;%s\007" "${PWD/#$HOME/\~}"'
+
+PS1="${user_color}\u${clear_color}@${host_color}\h${clear_color}:${cwd_color}\W${clear_color}\$(ret_prompt)\$ "
 
 if [ -f "${HOME}/.local/bin/git-prompt.sh" ]; then
     export GIT_PS1_SHOWCOLORHINTS=1

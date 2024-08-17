@@ -57,7 +57,7 @@ ret_prompt() {
     fi
 }
 
-#PROMPT_COMMAND='printf "\033]0;%s\007" "${PWD/#$HOME/\~}"'
+PROMPT_COMMAND='printf "\033]0;%s\007" "${PWD/#$HOME/\~}"'
 
 PS1="${user_color}\u${clear_color}@${host_color}\h${clear_color}:${cwd_color}\W${clear_color}\$(ret_prompt)\$ "
 

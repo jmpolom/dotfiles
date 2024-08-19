@@ -23,7 +23,7 @@ return {
 
             cmp.setup({
                 completion = {
-                    completeopt = 'menu,menuone,noinsert'
+                    completeopt = 'menu,menuone,noinsert,noselect'
                 },
                 sources = {
                     {name = 'path'},

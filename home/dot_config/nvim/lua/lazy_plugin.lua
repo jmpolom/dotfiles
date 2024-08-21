@@ -17,7 +17,19 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim and import plugins
 require("lazy").setup({
+  -- why are these settings under 'performance'??
+  performance = {
+    reset_packpath = false,
+    rtp = {
+      reset = false, -- letting lazy do this caused problems once already
+      paths = {},
+    },
+  },
   spec = {
     { import = "plugins" }
+  },
+  profiling = {
+    loader = false,
+    require = false,
   },
 })

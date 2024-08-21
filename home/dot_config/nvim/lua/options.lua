@@ -10,7 +10,7 @@ vim.opt.relativenumber = false
 vim.opt.termguicolors = true
 
 -- General
-vim.opt.clipboard = { "unnamed", "unnamedplus" }
+vim.opt.clipboard = { "unnamedplus" }
 vim.opt.confirm = true
 vim.opt.hidden = true
 vim.opt.wildignore = vim.opt.wildignore + { "*/.git/*", "*/.DS_Store" }

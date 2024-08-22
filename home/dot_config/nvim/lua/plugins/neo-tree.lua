@@ -7,7 +7,6 @@ return {
           "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
           "MunifTanjim/nui.nvim",
         },
-        event = "VeryLazy",
         opts = {
             close_if_last_window = true,
             filesystem = {

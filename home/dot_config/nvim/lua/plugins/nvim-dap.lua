@@ -23,6 +23,5 @@ return {
             vim.keymap.set("n", "<F7>", "<cmd>lua require(\"dap\").step_into()<CR>", { noremap = true })
             vim.keymap.set("n", "<F12>", "<cmd>lua require(\"dap.ui.widgets\").hover()<CR>", { noremap = true })
         end,
-        event = "VeryLazy",
     }
 }

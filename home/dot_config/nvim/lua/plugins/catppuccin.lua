@@ -1,5 +1,6 @@
 return {
-    { "catppuccin/nvim",
+    {
+        "catppuccin/nvim",
         name = "catppuccin",
         lazy = false,
         init = function()

@@ -3,7 +3,6 @@ return {
         "VonHeikemen/lsp-zero.nvim",
         branch = "v2.x",
         enabled = false,
-        event = "VeryLazy",
         ft = {
             "lua",
             "sh",

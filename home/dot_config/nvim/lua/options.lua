@@ -40,13 +40,41 @@ vim.opt.errorbells = false
 vim.opt.visualbell = false
 
 -- Diagnostics
+local dx_signs = {
+    Error = "󰅚",
+    Warn = "󰀪",
+    Info = "",
+    Hint = "󰌶",
+}
+
 local function dx_format(d)
-    return string.format("(%d:%d) %s", d.lnum, d.col, d.message)
+    local float_signs = {dx_signs.Error, dx_signs.Warn, dx_signs.Info, dx_signs.Hint}
+    return string.format("(%d:%d) %s %s", d.lnum, d.col, float_signs[d.severity], d.message)
 end
 
 vim.diagnostic.config({
-    virtual_text = true,
     float = {
-        format=dx_format,
+        border = "rounded",
+        format = dx_format,
     },
+    severity_sort = true,
+    virtual_text = true,
 })
+
+if vim.version.ge(vim.version(), {0,10,0}) then
+    vim.diagnostic.config({
+        signs = {
+            text = {
+                [vim.diagnostic.severity.ERROR] = dx_signs.Error,
+                [vim.diagnostic.severity.WARN] = dx_signs.Warn,
+                [vim.diagnostic.severity.INFO] = dx_signs.Info,
+                [vim.diagnostic.severity.HINT] = dx_signs.Hint,
+            },
+        },
+    })
+else
+    for type, icon in pairs(dx_signs) do
+      local hl = "DiagnosticSign" .. type
+      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    end
+end

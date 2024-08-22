@@ -1,7 +1,7 @@
 local function open_float_all()
     vim.diagnostic.open_float(nil,{
-        focus=false,
-        scope="buffer",
+        focus = false,
+        scope = "buffer",
     })
 end
 

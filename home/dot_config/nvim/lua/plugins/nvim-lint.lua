@@ -26,26 +26,6 @@ return {
                 },
             }
 
-            -- local signs = { Error = "󰅚", Warn = "󰀪", Hint = "󰌶", Info = "" }
-            -- for type, icon in pairs(signs) do
-            --   local hl = "DiagnosticSign" .. type
-            --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-            -- end
-
-            -- vim.diagnostic.config({
-            --     float = {
-            --         style = 'minimal',
-            --         border = 'rounded',
-            --         source = 'always',
-            --         prefix = '',
-            --     },
-            --     signs = {
-            --         text = {
-            --             [vim.diagnostic.severity.ERROR] = 'EE',
-            --         },
-            --     },
-            -- })
-
             vim.api.nvim_create_autocmd({
                 "BufEnter",
                 "BufWritePost",
@@ -53,7 +33,7 @@ return {
                 "TextChangedI",
             }, {
                 callback = function()
-                    require("lint").try_lint(_,{ignore_errors=true})
+                    require("lint").try_lint(nil,{ignore_errors = true})
                 end,
             })
         end,

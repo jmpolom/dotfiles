@@ -53,7 +53,7 @@ return {
                 "TextChangedI",
             }, {
                 callback = function()
-                    require("lint").try_lint()
+                    require("lint").try_lint(_,{ignore_errors=true})
                 end,
             })
         end,

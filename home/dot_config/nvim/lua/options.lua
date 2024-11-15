@@ -61,7 +61,7 @@ vim.diagnostic.config({
     virtual_text = true,
 })
 
-if vim.version.ge(vim.version(), {0,10,0}) then
+if vim.version.cmp(vim.version(), {0,10,0}) == 1 then
     vim.diagnostic.config({
         signs = {
             text = {

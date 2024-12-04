@@ -56,5 +56,6 @@ return {
                capabilities = lsp_capabilities,
             })
         end,
+        enabled = false,
     }
 }

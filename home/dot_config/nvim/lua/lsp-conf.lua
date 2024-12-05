@@ -127,7 +127,7 @@ local function make_lsp_autocmd(filetypes, client_config)
     vim.api.nvim_create_autocmd('FileType', {
         pattern = filetypes,
         callback = function(arg)
-            if vim.fn.executable(client_config(arg).cmd[1]) then
+            if vim.fn.executable(client_config(arg).cmd[1]) == 1 then
                 vim.lsp.start(client_config(arg))
             end
         end

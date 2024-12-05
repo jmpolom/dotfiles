@@ -18,3 +18,7 @@ require("nvim-lint-conf")
 require("nvim-surround-conf")
 require("vim-fugitive-conf")
 require("vim-illuminate-conf")
+
+-- neovim lua debugging, hopefully we do not need this again
+-- require("nvim-dap-conf")
+-- require("osv-conf")

@@ -1,6 +1,7 @@
-local lsp_cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-local nvim_default_capabilities = vim.lsp.protocol.make_client_capabilities()
-local runtime_capabilities = vim.tbl_deep_extend('force', nvim_default_capabilities, lsp_cmp_capabilities)
+-- local lsp_cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- local nvim_default_capabilities = vim.lsp.protocol.make_client_capabilities()
+-- local runtime_capabilities = vim.tbl_deep_extend('force', nvim_default_capabilities, lsp_cmp_capabilities)
+local runtime_capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local function rustalyzer_workspace(arg)
     local cargo_crate_root = vim.fs.root(arg.buf, {'Cargo.toml'})

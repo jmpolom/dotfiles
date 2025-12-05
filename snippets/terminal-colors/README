@@ -1,0 +1,6 @@
+Some scripts to demonstrate terminal output coloring which were found in
+various corners of the Internet. Terminal colors use ANSI standard terminal
+escape sequences which are only officially documented in the
+proprietary/copyrighted ANSI specifications. The best source of information for
+terminal escapes seems to be the [Wikipedia
+page](https://en.wikipedia.org/wiki/ANSI_escape_code).

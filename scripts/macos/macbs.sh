@@ -2,17 +2,19 @@
 
 set -eux
 
-hostname="satellite"
+vared -p "Enter desired system hostname: " -c hostname
 
 # set hostnames
-if [[ "$(scutil --get ComputerName)" = "$hostname" ]] && \
-   [[ "$(scutil --get HostName)" = "$hostname" ]]; then
-    printf "macOS HostName and ComputerName are correctly set! \n"
-else
-    printf "Setting macOS HostName and ComputerName... "
-    scutil --set ComputerName "$hostname"
-    scutil --set HostName "$hostname"
-    printf "Done! \n"
+if [[ -v hostname ]]; then
+  if [[ "$(scutil --get ComputerName)" = "$hostname" ]] && \
+     [[ "$(scutil --get HostName)" = "$hostname" ]]; then
+      printf "macOS HostName and ComputerName are correctly set! \n"
+  else
+      printf "Setting macOS HostName and ComputerName... "
+      scutil --set ComputerName "$hostname"
+      scutil --set HostName "$hostname"
+      printf "Done! \n"
+  fi
 fi
 
 # disable power chime

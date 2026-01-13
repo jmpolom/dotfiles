@@ -1,14 +1,14 @@
 #!/bin/zsh
 
-if [[ "$PATH" != "$HOME/.local/bin" ]]; then
-    PATH="$HOME/.local/bin:$PATH"
+if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    path=("$HOME/.local/bin" $path)
 fi
 
 if [[ -d "/opt/homebrew" ]]; then
     export HOMEBREW_PREFIX="/opt/homebrew"
     export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
     export HOMEBREW_REPOSITORY="/opt/homebrew"
-    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}"
+    export path=("/opt/homebrew/bin" "/opt/homebrew/sbin" ${path+$path})
     export MANPATH=":${MANPATH#:}"
     export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
 fi
@@ -21,8 +21,11 @@ fi
 
 # update fpath for homebrew completions
 if command -v brew &>/dev/null; then
-    FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
+    fpath+="$(brew --prefix)/share/zsh/site-functions"
 fi
+
+# add user local completions path
+fpath+="$HOME/.local/share/zsh/completions"
 
 # get uname: [Linux, Darwin]
 uname="$(uname)"

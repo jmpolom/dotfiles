@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-if [[ "$PATH" != *"$HOME/.local/bin"* ]]; then
+if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
@@ -36,8 +36,27 @@ shopt -s histappend
 
 HISTSIZE=1000
 
-export EDITOR=nvim
-export VISUAL=nvim
+if command -v nvim &> /dev/null; then
+    export EDITOR=nvim
+    export VISUAL=nvim
+fi
+
+# kubectl
+set_kubeconfig() {
+    shopt -s nullglob
+    local kube_files=("$HOME"/.kube1/*.yaml)
+    shopt -u nullglob
+
+    if (( ${#kube_files[@]} )); then
+        local rem_kube_files=("${kube_files[@]:1}")
+        printf -v KUBECONFIG "%s" "${kube_files[0]}" "${rem_kube_files[@]/#/':'}"
+        export KUBECONFIG
+    fi
+}
+
+if command -v kubectl &> /dev/null; then
+    set_kubeconfig
+fi
 
 # DarkSlateGray3
 user_color=$'\001\e[38;5;116m\002'

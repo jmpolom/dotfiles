@@ -1,0 +1,2 @@
+Host archon archon.local archon.subly.me
+  IdentityFile ~/.ssh/subly

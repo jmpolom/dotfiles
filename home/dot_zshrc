@@ -69,19 +69,27 @@ if command -v fzf &> /dev/null; then
     [[ -f "$fzf_completion_path" ]] && source "$fzf_completion_path"
 fi
 
-# correct keymapping issues on Linux -- why is this only needed for zsh?!
-# also wonky and unifxed: insert, page-up, page-down
-if [[ "$uname" == "Linux" ]]; then
-    bindkey '^[[3~' delete-char
-    bindkey '^[[H' beginning-of-line
-    bindkey '^[[F' end-of-line
+# correct keymapping issues -- why is this only needed for zsh?!
+if [[ -f "${ZDOTDIR:-$HOME}/.zkbd/${TERM}-${${DISPLAY:t}:-$VENDOR-$OSTYPE}" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zkbd/${TERM}-${${DISPLAY:t}:-$VENDOR-$OSTYPE}"
 fi
 
-# macOS only aliases
-if [[ "$uname" == "Darwin" ]]; then
-    alias ls='gls --color=auto --group-directories-first'
+[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
+[[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
+[[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
+[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-search
+[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
+[[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" history-search-backward
+[[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" history-search-forward
+
+# macOS gnu coreutils aliases
+if command -v gsed &> /dev/null; then
     alias sed='gsed'
-elif [[ "$uname" == "Linux" ]]; then
+fi
+
+if command -v gls &> /dev/null; then
+    alias ls='gls --color=auto --group-directories-first'
+else
     alias ls='ls --color=auto --group-directories-first'
 fi
 

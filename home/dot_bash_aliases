@@ -1,9 +1,13 @@
 #!/usr/bin/bash
 
-if [ "$(uname)" = "Darwin" ]; then
-    alias ls='gls --color=auto --group-directories-first'
+# macOS gnu coreutils aliases
+if command -v gsed &> /dev/null; then
     alias sed='gsed'
-elif [ "$(uname)" = "Linux" ]; then
+fi
+
+if command -v gls &> /dev/null; then
+    alias ls='gls --color=auto --group-directories-first'
+else
     alias ls='ls --color=auto --group-directories-first'
 fi
 

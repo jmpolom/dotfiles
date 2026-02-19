@@ -41,6 +41,23 @@ if command -v nvim &> /dev/null; then
     export VISUAL=nvim
 fi
 
+uname=$(uname)
+
+# fzf
+if command -v fzf &> /dev/null; then
+    if [[ "$uname" == "Darwin" ]]; then
+        fzf_keybindings_path="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/fzf/shell/key-bindings.bash"
+        fzf_completion_path="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/fzf/shell/completion.bash"
+    # works for fedora, might have to edit if another distro
+    elif [[ "$uname" == "Linux" ]]; then
+        fzf_keybindings_path="/usr/share/fzf/shell/key-bindings.bash"
+    fi
+
+    export FZF_DEFAULT_COMMAND='fd --hidden --follow' # use with fd instead of find
+    [[ -f "$fzf_keybindings_path" ]] && source "$fzf_keybindings_path"
+    [[ -v fzf_completion_path ]] && [[ -f "$fzf_completion_path" ]] && source "$fzf_completion_path"
+fi
+
 # kubectl
 set_kubeconfig() {
     shopt -s nullglob

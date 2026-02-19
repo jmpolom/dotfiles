@@ -70,8 +70,8 @@ if command -v fzf &> /dev/null; then
 fi
 
 # correct keymapping issues -- why is this only needed for zsh?!
-if [[ -f "${ZDOTDIR:-$HOME}/.zkbd/${TERM}-${${DISPLAY:t}:-$VENDOR-$OSTYPE}" ]]; then
-    source "${ZDOTDIR:-$HOME}/.zkbd/${TERM}-${${DISPLAY:t}:-$VENDOR-$OSTYPE}"
+if [[ -f "${ZDOTDIR:-$HOME}/.zkbd/${TERM}-${VENDOR}" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zkbd/${TERM}-${VENDOR}"
 fi
 
 [[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char

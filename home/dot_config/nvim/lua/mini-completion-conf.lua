@@ -1,6 +1,6 @@
 MiniDeps.add({
     name = "mini.completion",
-    source = "echasnovski/mini.completion",
+    source = "nvim-mini/mini.completion",
     checkout = "main",
 })
 

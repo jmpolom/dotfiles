@@ -6,7 +6,7 @@ if not vim.uv.fs_stat(mini_path) then
   vim.print("Installing `mini.deps`")
   local clone_cmd = {
     'git', 'clone', '--filter=blob:none',
-    'https://github.com/echasnovski/mini.deps.git', mini_path
+    'https://github.com/nvim-mini/mini.deps.git', mini_path
   }
   vim.system(clone_cmd):wait()
   vim.cmd('packadd mini.deps | helptags ALL')

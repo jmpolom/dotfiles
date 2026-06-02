@@ -1,3 +1,8 @@
+Include ~/.ssh/config.d/*
+Include /Users/jpolom/.colima/ssh_config
+
 Host *
   AddKeysToAgent yes
-Include ~/.ssh/hosts_config
+  ControlMaster auto
+  ControlPath ~/.ssh/sockets/%r@%h-%p
+  ControlPersist 60

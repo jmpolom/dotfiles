@@ -1,5 +1,5 @@
 Include ~/.ssh/config.d/*
-Include /Users/jpolom/.colima/ssh_config
+Include ~/.colima/ssh_config
 
 Host *
   AddKeysToAgent yes

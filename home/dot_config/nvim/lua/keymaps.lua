@@ -30,3 +30,6 @@ vim.keymap.set("n", "dl", "<cmd>lua vim.diagnostic.open_float()<cr>")
 vim.keymap.set("n", "da", open_float_all)
 vim.keymap.set("n", "d[", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
 vim.keymap.set("n", "d]", "<cmd>lua vim.diagnostic.goto_next()<cr>")
+
+-- Sort selected comma separated string
+vim.keymap.set("v", "csa", [[:s/\%V\S\+\%V/\=join(sort(split(submatch(0), ',\s*')), ',')/<cr>]])

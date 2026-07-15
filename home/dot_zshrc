@@ -25,13 +25,17 @@ if command -v brew &>/dev/null; then
     fpath+="$(brew --prefix)/share/zsh/site-functions"
 fi
 
+if command -v kubectl-krew &>/dev/null; then
+    export path=("${KREW_ROOT:-$HOME/.krew}/bin" $path)
+fi
+
 # add user local completions path
 fpath+="$HOME/.local/share/zsh/completions"
 
 # get uname: [Linux, Darwin]
 uname="$(uname)"
 
-setopt APPEND_HISTORY
+setopt SHARE_HISTORY
 setopt MULTIBYTE
 setopt PROMPT_SUBST
 
